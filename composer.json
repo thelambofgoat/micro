@@ -1,0 +1,13 @@
+{
+    "name": "thelambofgoat/micro",
+    "authors": [
+        {
+            "name": "Paul Smalling",
+            "email": "thelambofgoat@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {"App\\": "app/"}
+    }
+}
