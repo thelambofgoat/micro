@@ -1,6 +1,9 @@
 <?php
 
+use Psr\Http\Message\RequestInterface;
 
-class Request {
+class Request implements RequestInterface {
+
+    
 
 }

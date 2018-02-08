@@ -1,23 +1,32 @@
 <?php
 
+namespace App\Libraries;
+
+use PDO;
+use PDOException;
 
 class Connection {
 
     const ERROR_BAD_CONFIGURATION = "Error: bad configuration";
     public $conn;
 
-    public function __construct(array $conf)
+    public function __construct($config)
     {
-        if (!isset($conf['driver'])) {
-            throw new Exception(self::ERROR_BAD_CONFIGURATION);
+        try {
+            $dsn = sprintf('mysql:host=%s;dbname=%s', $config['host'], $config['database']);
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            ];
+            $this->conn = new PDO($dsn, $config['user'], $config['password'], $options);
+        } catch (PDOException $e) {
+            print "Error!" . $e->getMessage();
+            die();
         }
-        $dsn = $this->getDsn($conf);
     }
 
-    private function getDsn(DsnProvider $dsnProvider)
+    public function getConn()
     {
-        return $dsnProvider->getDsn();
+        return $this->conn;
     }
-
 
 }
